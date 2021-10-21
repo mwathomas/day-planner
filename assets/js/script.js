@@ -3,47 +3,47 @@ var workday = [
   {
     hour: "09",
     time: "09",
-    meridiem: "am",
+    ampm: "am",
   },
   {
     hour: "10",
     time: "10",
-    meridiem: "am",
+    ampm: "am",
   },
   {
     hour: "11",
     time: "11",
-    meridiem: "am",
+    ampm: "am",
   },
   {
     hour: "12",
     time: "12",
-    meridiem: "pm",
+    ampm: "pm",
   },
   {
     hour: "01",
     time: "13",
-    meridiem: "pm",
+    ampm: "pm",
   },
   {
     hour: "02",
     time: "14",
-    meridiem: "pm",
+    ampm: "pm",
   },
   {
     hour: "03",
     time: "15",
-    meridiem: "pm",
+    ampm: "pm",
   },
   {
     hour: "04",
     time: "16",
-    meridiem: "pm",
+    ampm: "pm",
   },
   {
     hour: "05",
     time: "17",
-    meridiem: "pm",
+    ampm: "pm",
   },
 ];
 
@@ -63,7 +63,7 @@ workday.forEach(function (blockTime) {
     })
     .appendTo(".container");
 
-  var hourField = $("<div>").text(`${blockTime.hour}${blockTime.meridiem}`);
+  var hourField = $("<div>").text(`${blockTime.hour}${blockTime.ampm}`);
 
   // creates schdeduler data
   var hourBox = $("<div>").attr({
@@ -89,9 +89,11 @@ workday.forEach(function (blockTime) {
 
   // creates save button
   var saveBtn = $("<i class='far fa-save fa-lg'></i>");
-  var saveEvent = $("<button>").attr({
-    class: "col-md-1 saveBtn",
-  });
+  var saveEvent = $("<button>")
+    .attr({
+      class: "col-md-1 saveBtn",
+    })
+    .prepend('<img id="saveimage" src="assets/images/download.png" />');
   saveEvent.append(saveBtn);
   rows.append(hourField, hourBox, saveEvent);
 });
