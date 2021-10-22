@@ -48,6 +48,7 @@ var workday = [
 ];
 console.log(allEntries);
 var allEntries = JSON.parse(localStorage.getItem("allEntries"));
+if (allEntries == null) allEntries = [];
 
 // gets todays date and puts it in the header
 function getDate() {
@@ -57,7 +58,7 @@ function getDate() {
 getDate();
 
 // creates the visuals for the scheduler body
-workday.forEach(function (blockTime) {
+workday.forEach(function (block) {
   // creates timeblocks row
   var rows = $("<form>")
     .attr({
@@ -65,7 +66,7 @@ workday.forEach(function (blockTime) {
     })
     .appendTo(".container");
 
-  var hourField = $("<div>").text(`${blockTime.hour}${blockTime.ampm}`);
+  var hourField = $("<div>").text(`${block.hour}${block.ampm}`);
 
   // creates schdeduler data
   var hourBox = $("<div>").attr({
@@ -73,23 +74,23 @@ workday.forEach(function (blockTime) {
   });
   var eventInfo = $("<textarea>");
   hourBox.append(eventInfo);
-  eventInfo.append(allEntries[`${blockTime.time}` - 9]);
+  eventInfo.append(allEntries[`${block.time}` - 9]);
 
   //colors the hour blocks based on current time
-  if (blockTime.time < moment().format("HH")) {
+  if (block.time < moment().format("HH")) {
     eventInfo.attr({
       class: "past",
-      id: `e${blockTime.time}`,
+      id: `e${block.time}`,
     });
-  } else if (blockTime.time === moment().format("HH")) {
+  } else if (block.time === moment().format("HH")) {
     eventInfo.attr({
       class: "present",
-      id: `e${blockTime.time}`,
+      id: `e${block.time}`,
     });
-  } else if (blockTime.time > moment().format("HH")) {
+  } else if (block.time > moment().format("HH")) {
     eventInfo.attr({
       class: "future",
-      id: `e${blockTime.time}`,
+      id: `e${block.time}`,
     });
   }
 
@@ -98,7 +99,7 @@ workday.forEach(function (blockTime) {
   var saveEvent = $("<button>")
     .attr({
       class: "col-md-1 saveBtn",
-      id: `b${blockTime.time}`,
+      id: `b${block.time}`,
     })
     .prepend('<img id="saveimage" src="assets/images/download.png" />');
   saveEvent.append(saveBtn);
