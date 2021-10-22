@@ -103,10 +103,15 @@ workday.forEach(function (blockTime) {
   rows.append(hourField, hourBox, saveEvent);
 });
 
+// saves data to be used in localStorage
 var saveBtnClick = document.querySelector(".saveBtn");
-var eventInput = document.querySelector(".event");
-// // saves data to be used in localStorage
+var eventInput = document.querySelector("#event");
+
 saveBtnClick.addEventListener("click", function (event) {
   event.preventDefault();
-  localStorage.setItem("event", eventInput.value);
+  localStorage.setItem("eventInput", eventInput.value);
 });
+
+//for loop that captures all "event" form inputs into an array
+//Json string to local storage
+//parse to reload
